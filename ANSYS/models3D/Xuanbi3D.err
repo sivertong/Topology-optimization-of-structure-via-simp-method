@@ -1,0 +1,10 @@
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       17:37:44
+
+ *** ERROR ***                           CP =       0.141   TIME= 17:37:45
+ Data file D:\CodeSave\GitCode\Topology-optimization-of-structure-via-sim
+ p-methodNEW\ANSYS\models3D\Xuanbi3D.db has incorrect format, is         
+ missing READ/WRITE permission, or is empty for RESUME.                  
+
+ *** WARNING ***                         CP =       0.141   TIME= 17:37:45
+ WHILE PROCESSING FILE BASED INPUT (/INPUT OR MACRO) AN ERROR HAS        
+ OCCURRED.  SHOULD INPUT PROCESSING BE SUSPENDED?                        

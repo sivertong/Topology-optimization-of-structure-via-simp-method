@@ -1,5 +1,5 @@
-/CWD,'H:\GitHub\Topology-optimization-of-structure-via-simp-method\\ANSYS\results'
-RESUME,'cantilever2D','db','H:\GitHub\Topology-optimization-of-structure-via-simp-method\ANSYS\models',0,0
+/CWD,'D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results'
+RESUME,'complex2D_grid','db','D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\models',0,0
 /FILENAME,top2d,1
 /TITLE,top2d 
 
@@ -64,6 +64,11 @@ ETABLE,strain_e,SENE,
 *CFOPEN,nodal_solution_u,txt
 *VWRITE,NODAL_SOLUTION_U(1,1), NODAL_SOLUTION_U(1,2)
 (E15.7,'    ',E15.7)
+*CFCLOS
+
+*CFOPEN,testout,txt
+*VWRITE,MATERIAL(1,1),MATERIAL(1,2)
+(E14.7,E15.7)
 *CFCLOS
 
 SAVE

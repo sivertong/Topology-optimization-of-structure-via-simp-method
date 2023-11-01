@@ -4,7 +4,9 @@ from numpy import *
 
 
 global ELEMENT_COUNTS,ELEMENT_ATTRIBUTES,NODE_COORDINATES,NODE_COUNTS,CENTERS,V,DIM,GRID_TYPE,TYPE
-global R, E, NU, PENAL, MOVE,VOLFAC
+global R, E, NU, PENAL, MOVE,VOLFAC, GostElem
+# 模型中超过某个单元数量的单元为幽灵单元，这个值从workbench划分网格后获知
+RealElem = 1440
 
 def hyperparameter(r,penal,volfac,move,e,nu):
     global R, E, NU, PENAL, MOVE,VOLFAC
@@ -36,8 +38,13 @@ def initialize_global_variable(type):
         DIM = 24
         GRID_TYPE = 'Hexahedron'
     ANSYS_SOLVER = FiniteElementAnalysis()
-    # ANSYS_SOLVER.boot()
-    ELEMENT_COUNTS, NODE_COUNTS = ANSYS_SOLVER.get_counts(ANSYS_SOLVER.awd + 'elements_nodes_counts.txt')
+    ANSYS_SOLVER.boot()
+    ELEMENT_COUNTS, NODE_COUNTS = ANSYS_SOLVER.get_counts(ANSYS_SOLVER.awd + '\\elements_nodes_counts.txt')
+    # K, ELEMENT_ATTRIBUTES, CENTERS, V, NODE_COORDINATES = ANSYS_SOLVER.get_meshmodel_data()
+    # 直接ANSYS获取应变能不使用K
     ELEMENT_ATTRIBUTES, CENTERS, V, NODE_COORDINATES = ANSYS_SOLVER.get_meshmodel_data()
+
+    ELEMENT_COUNTS = RealElem
+    V = V[:global_variable.RealElem]
 
 

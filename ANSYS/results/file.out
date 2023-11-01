@@ -1,0 +1,578 @@
+
+ ANSYS Mechanical Enterprise                       
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *            ANSYS 2020 R2          LEGAL NOTICES             *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2020 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ 2020 R2 
+     
+ Point Releases and Patches installed:   
+     
+ ANSYS, Inc. Products 2020 R2
+ SpaceClaim 2020 R2  
+ Discovery 2020 R2   
+ AIM 2020 R2 
+ Live (includes SpaceClaim) 2020 R2  
+ ANSYS Sherlock 2020 R2  
+ Autodyn 2020 R2 
+ LS-DYNA 2020 R2 
+ ICEM CFD 2020 R2
+ Aqwa 2020 R2
+ SPEOS 2020 R2   
+ Mechanical Products 2020 R2 
+ Additive 2020 R2
+ Icepak (includes CFD-Post) 2020 R2  
+ ACIS Geometry Interface 2020 R2 
+ AutoCAD Geometry Interface 2020 R2  
+ Catia, Version 4 Geometry Interface 2020 R2 
+ Catia, Version 5 Geometry Interface 2020 R2 
+ Catia, Version 6 Geometry Interface 2020 R2 
+ Creo Elements/Direct Modeling Geometry Interface 2020 R2
+ Creo Parametric Geometry Interface 2020 R2  
+ Inventor Geometry Interface 2020 R2 
+ JTOpen Geometry Interface 2020 R2   
+ NX Geometry Interface 2020 R2   
+ Parasolid Geometry Interface  2020 R2   
+ Solid Edge Geometry Interface 2020 R2   
+ SOLIDWORKS Geometry Interface 2020 R2   
+ ANSYS, Inc. License Manager 2020 R2 
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  INITIAL JOBNAME              = file                                                                                                                                                                                                                                                    
+  BATCH MODE REQUESTED (-b)    = LIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  SHARED MEMORY PARALLEL REQUESTED
+  INPUT FILE NAME              = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\Python\top2d_rinf.txt
+  OUTPUT FILE NAME             = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results\file.out
+  LANGUAGE                     = en-us               
+  INITIAL DIRECTORY = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results
+
+ PARAMETER STATUS-           (   1 PARAMETERS DEFINED)
+
+ NAME                              VALUE                        TYPE
+ S READ                                                          CHARACTER
+
+ RELEASE= 2020 R2              BUILD= 20.2      UP20200601   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file  20:47:14  OCT 31, 2023 CP=      0.141
+
+     1  /CWD,'D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results'  
+     2  RESUME,'complex2D_grid','db','D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\models',0,0   
+     3  /FILENAME,top2d,1   
+     4  /TITLE,top2d
+     5      
+     6  *GET,ELEMSUM,ELEMENT,0,COUNT
+     7  *GET,NODESUM,NODE,0,COUNT   
+     8      
+     9      
+    10  *DIM,MATERIAL,ARRAY,ELEMSUM,2   
+    11  *VREAD,MATERIAL(1,1),material,txt,,JIK,2,ELEMSUM
+    12  (E14.7,E15.7)   
+    13      
+    14      
+    15  /PREP7  
+    16  *DO,i,1,ELEMSUM 
+    17  MP,EX,i,MATERIAL(i,2)   
+    18  MP,PRXY,i,MATERIAL(i,1) 
+    19  *ENDDO  
+    20      
+    21      
+    22  *DO,i,1,ELEMSUM 
+    23  FLST,2,1,2,ORDE,1   
+    24  FITEM,2,i   
+    25  EMODIF,P51X,MAT,i,  
+    26  *ENDDO  
+    27      
+    28      
+    29  /SOL
+    30  ANTYPE,0
+    31      
+    32      
+    33  /STATUS,SOLU
+    34  SOLVE   
+    35      
+    36  /POST1  
+    37  ETABLE,strain_e,SENE,   
+    38  *VGET,strain_e,ELEM,1,ETAB,STRAIN_E, , ,2   
+    39  *CFOPEN,strain_energy,txt   
+    40  *VWRITE,strain_e(1,1)   
+    41  (E15.7) 
+    42  *CFCLOS 
+    43      
+    44      
+    45      
+    46  *DIM,NODAL_SOLUTION_STRESS,ARRAY,NODESUM,1  
+    47  *VGET,NODAL_SOLUTION_STRESS(1,1),NODE,1,S,EQV   
+    48  *CFOPEN,nodal_solution_stress,txt   
+    49  *VWRITE,SEQU,NODAL_SOLUTION_STRESS(1,1) 
+    50  %10I    %15.7E  
+    51  *CFCLOS 
+    52      
+    53  *DIM,NODAL_SOLUTION_STRAIN,ARRAY,NODESUM,1  
+    54  *VGET,NODAL_SOLUTION_STRAIN(1,1),NODE,1,EPTO,INT
+    55  *CFOPEN,nodal_solution_strain,txt   
+    56  *VWRITE,SEQU,NODAL_SOLUTION_STRAIN(1,1) 
+    57  %10I    %15.7E  
+    58  *CFCLOS 
+    59      
+    60      
+    61  *DIM,NODAL_SOLUTION_U,ARRAY,NODESUM,2   
+    62  *VGET,NODAL_SOLUTION_U(1,1),NODE,1,U,X  
+    63  *VGET,NODAL_SOLUTION_U(1,2),NODE,1,U,Y  
+    64  *CFOPEN,nodal_solution_u,txt
+    65  *VWRITE,NODAL_SOLUTION_U(1,1), NODAL_SOLUTION_U(1,2)
+    66  (E15.7,'    ',E15.7)
+    67  *CFCLOS 
+    68      
+    69  *CFOPEN,testout,txt 
+    70  *VWRITE,MATERIAL(1,1),MATERIAL(1,2) 
+    71  (E14.7,E15.7)   
+    72  *CFCLOS 
+    73      
+    74  SAVE
+    75  FINISH  
+    76  exit
+
+ RUN SETUP PROCEDURE FROM FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans
+
+ /INPUT FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans  LINE=       0
+
+ Current working directory switched to D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results                                                                                                                                                                 
+
+ RESUME ANSYS DATA FROM FILE NAME=D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\models\complex2D_grid.db                                                                                                                                                            
+
+ *** ANSYS GLOBAL STATUS *** 
+
+ TITLE =  File: H:\MATERTHESIS\ANSYS_SD\APDL_SCRIPT\ANSYS_GUI\VERSATILE_SIMP\2D
+ ANALYSIS TYPE =  STATIC (STEADY-STATE)
+ NUMBER OF ELEMENT TYPES =      1
+      3005 ELEMENTS CURRENTLY SELECTED.  MAX ELEMENT NUMBER =        3005
+      3198 NODES CURRENTLY SELECTED.     MAX NODE NUMBER =           3198
+        15 KEYPOINTS CURRENTLY SELECTED. MAX KEYPOINT NUMBER =         15
+        15 LINES CURRENTLY SELECTED.     MAX LINE NUMBER =             15
+         1 AREAS CURRENTLY SELECTED.     MAX AREA NUMBER =              1
+ MAXIMUM LINEAR PROPERTY NUMBER        =       1
+ ACTIVE COORDINATE SYSTEM              =       0  (CARTESIAN)  
+ MAXIMUM COUPLED D.O.F. SET NUMBER     =       2
+ NUMBER OF SPECIFIED CONSTRAINTS       =     180
+ NUMBER OF NODAL LOADS                 =      25
+ CURRENT LOAD CASE =      0 OF      0
+ LOAD SET   =       1
+ SUBSTEP    =       1
+ TIME/FREQ  =    1.0000    
+
+ INITIAL JOBNAME = file
+ CURRENT JOBNAME = file
+
+ CURRENT JOBNAME REDEFINED AS top2d
+     Opening new LOG, ERROR, LOCK and PAGE FILES
+
+ TITLE= 
+ top2d                                                                         
+
+
+ *GET  ELEMSUM   FROM  ELEM  ITEM=COUN           VALUE=  3005.00000    
+
+ *GET  NODESUM   FROM  NODE  ITEM=COUN       VALUE=  3198.00000     
+
+ SET PARAMETER DIMENSIONS ON  MATERIAL TYPE=ARRA  DIMENSIONS=  3005     2     1
+
+ VECTOR READ OPERATION  *VREAD  
+  MATERIAL READ FROM FILE material.txt
+ VECTOR LENGTH=      2
+ NUMBER OF COLUMNS=   3005
+ LOOP DIRECTIONS=JIK   COUNTS=       2    3005       1
+ FORMAT=(E14.7,E15.7)                                                         
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE 2020 R2          20.2     ***
+ ANSYS Mechanical Enterprise                       
+ 20120530  VERSION=WINDOWS x64   20:47:16  OCT 31, 2023 CP=      0.172
+
+ top2d                                                                         
+
+
+
+          ***** ANSYS ANALYSIS DEFINITION (PREP7) *****
+
+ *DO LOOP ON PARAMETER= I FROM  1.0000     TO  3005.0     BY  1.0000    
+
+ MATERIAL          1     EX   =  0.1000000E-08  
+
+ MATERIAL          1     PRXY =  0.3000000      
+
+ *** WARNING ***                         CP =       0.172   TIME= 20:47:16
+ Poisson's ratio NU set for material 1 deleted.                          
+
+ *ENDDO  INDEX= I                               
+
+ *DO LOOP ON PARAMETER= I FROM  1.0000     TO  3005.0     BY  1.0000    
+
+ MODIFY ELEMENT         1 (IF SELECTED) TO HAVE  MAT  =      1
+
+ *ENDDO  INDEX= I                               
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.234
+
+
+
+ *****  ANSYS SOLUTION ROUTINE  *****
+
+
+ PERFORM A STATIC ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .2-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY  
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .STATIC (STEADY-STATE)
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   TIME AT END OF THE LOAD STEP. . . . . . . . . .  1.0000    
+   NUMBER OF SUBSTEPS. . . . . . . . . . . . . . .     1
+   STEP CHANGE BOUNDARY CONDITIONS . . . . . . . .DEFAULT
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS. . . . . . . . . . . .ALL DATA WRITTEN
+                                                  FOR THE LAST SUBSTEP
+
+
+ *****  ANSYS SOLVE    COMMAND  *****
+
+ TRANSFER SOLID MODEL BOUNDARY CONDITIONS TO FINITE ELEMENT MODEL
+      CONSTRAINTS    TRANSFERRED FROM LINES         =    184
+
+ *** WARNING ***                         CP =       0.250   TIME= 20:47:16
+ Previous testing revealed that 5 of the 3005 selected elements violate  
+ shape warning limits.  To review warning messages, please see the       
+ output or error file, or issue the CHECK command.                       
+
+ *** NOTE ***                            CP =       0.250   TIME= 20:47:16
+ The model data was checked and warning messages were found.             
+  Please review output or errors file (                                  
+ D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodN 
+ NEW\ANSYS\results\top2d.err ) for these warning messages.               
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+                ---GIVE SUGGESTIONS ONLY---
+
+ ELEMENT TYPE  1 IS PLANE182 WITH PLANE STRAIN OPTION. IT IS ASSOCIATED WITH
+ LINEAR MATERIALS ONLY AND POISSON'S RATIO IS NOT GREATER THAN 0.49.
+ KEYOPT(1)=3 IS SUGGESTED.
+
+
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE 2020 R2          20.2     ***
+ ANSYS Mechanical Enterprise                       
+ 20120530  VERSION=WINDOWS x64   20:47:16  OCT 31, 2023 CP=      0.250
+
+ top2d                                                                         
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .2-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY  
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .STATIC (STEADY-STATE)
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
+
+ *** NOTE ***                            CP =       0.312   TIME= 20:47:16
+ Present time 0 is less than or equal to the previous time.  Time will   
+ default to 1.                                                           
+
+ *** NOTE ***                            CP =       0.312   TIME= 20:47:16
+ The conditions for direct assembly have been met.  No .emat or .erot    
+ files will be produced.                                                 
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   TIME AT END OF THE LOAD STEP. . . . . . . . . .  1.0000    
+   NUMBER OF SUBSTEPS. . . . . . . . . . . . . . .     1
+   STEP CHANGE BOUNDARY CONDITIONS . . . . . . . .    NO
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS. . . . . . . . . . . .ALL DATA WRITTEN
+                                                  FOR THE LAST SUBSTEP
+
+
+ SOLUTION MONITORING INFO IS WRITTEN TO FILE= top2d.mntr                                                                                                                                                                                                                                                          
+
+
+ Range of element maximum matrix coefficients in global coordinates
+ Maximum = 1.49272964 at element 1149.                                   
+ Minimum = 5.359421192E-10 at element 1819.                              
+
+ *** WARNING ***                         CP =       0.375   TIME= 20:47:16
+ Coefficient ratio exceeds 1.0e8 - Check results.                        
+
+   *** ELEMENT MATRIX FORMULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1      3005  PLANE182      0.062   0.000021
+ Time at end of element matrix formulation CP = 0.375.                   
+
+ SPARSE MATRIX DIRECT SOLVER.
+  Number of equations =        6128,    Maximum wavefront =     16
+  Memory allocated for solver              =     6.233 MB
+  Memory required for in-core solution     =     6.011 MB
+  Memory required for out-of-core solution =     3.095 MB
+
+ *** NOTE ***                            CP =       0.484   TIME= 20:47:16
+ The Sparse Matrix Solver is currently running in the in-core memory     
+ mode.  This memory mode uses the most amount of memory in order to      
+ avoid using the hard drive as much as possible, which most often        
+ results in the fastest solution time.  This mode is recommended if      
+ enough physical memory is present to accommodate all of the solver      
+ data.                                                                   
+ Sparse solver maximum pivot= 3.96124756 at node 2273 UX.                
+ Sparse solver minimum pivot= 3.341661159E-10 at node 2772 UY.           
+ Sparse solver minimum pivot in absolute value= 3.341661159E-10 at node  
+ 2772 UY.                                                                
+
+   *** ELEMENT RESULT CALCULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1      3005  PLANE182      0.156   0.000052
+
+   *** NODAL LOAD CALCULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1      3005  PLANE182      0.031   0.000010
+ *** LOAD STEP     1   SUBSTEP     1  COMPLETED.    CUM ITER =      1
+ *** TIME =   1.00000         TIME INC =   1.00000      NEW TRIANG MATRIX
+
+
+ *** ANSYS BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+        1.125 MB WRITTEN ON ASSEMBLED MATRIX FILE: top2d.full
+        4.250 MB WRITTEN ON RESULTS FILE: top2d.rst
+
+ FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.625
+
+
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE 2020 R2          20.2     ***
+ ANSYS Mechanical Enterprise                       
+ 20120530  VERSION=WINDOWS x64   20:47:16  OCT 31, 2023 CP=      0.641
+
+ top2d                                                                         
+
+
+
+          ***** ANSYS RESULTS INTERPRETATION (POST1) *****
+
+ *** NOTE ***                            CP =       0.641   TIME= 20:47:16
+ Reading results into the database (SET command) will update the current 
+ displacement and force boundary conditions in the database with the     
+ values from the results file for that load set.  Note that any          
+ subsequent solutions will use these values unless action is taken to    
+ either SAVE the current values or not overwrite them (/EXIT,NOSAVE).    
+
+ STORE STRAIN_E FROM ITEM=SENE  FOR ALL SELECTED ELEMENTS
+
+ VECTOR GET OPERATION  strain_e  VECTOR LENGTH=    3005
+ NAME= ELEM         1  ETAB  STRAIN_E
+ ITLVL=       2
+
+ OPENED FILE= strain_energy.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ SET PARAMETER DIMENSIONS ON  NODAL_SOLUTION_STRESS
+  TYPE=ARRA  DIMENSIONS=     3198        1        1
+
+ VECTOR GET OPERATION  NODAL_SOLUTION_STRESS(1,1)  VECTOR LENGTH=    3198
+ NAME= NODE         1  S     EQV 
+
+ *** WARNING ***                         CP =       0.656   TIME= 20:47:16
+ The selected element set contains mixed materials.                      
+  This could invalidate error estimation.                                
+
+ OPENED FILE= nodal_solution_stress.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ SET PARAMETER DIMENSIONS ON  NODAL_SOLUTION_STRAIN
+  TYPE=ARRA  DIMENSIONS=     3198        1        1
+
+ VECTOR GET OPERATION  NODAL_SOLUTION_STRAIN(1,1)  VECTOR LENGTH=    3198
+ NAME= NODE         1  EPTO  INT 
+
+ OPENED FILE= nodal_solution_strain.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ SET PARAMETER DIMENSIONS ON  NODAL_SOLUTION_U
+  TYPE=ARRA  DIMENSIONS=     3198        2        1
+
+ VECTOR GET OPERATION  NODAL_SOLUTION_U(1,1)  VECTOR LENGTH=    3198
+ NAME= NODE         1  U     X   
+
+ VECTOR GET OPERATION  NODAL_SOLUTION_U(1,2)  VECTOR LENGTH=    3198
+ NAME= NODE         1  U     Y   
+
+ OPENED FILE= nodal_solution_u.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ OPENED FILE= testout.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ ALL CURRENT ANSYS DATA WRITTEN TO FILE NAME= top2d.db
+  FOR POSSIBLE RESUME FROM THIS POINT
+
+ EXIT THE ANSYS POST1 DATABASE PROCESSOR
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.734
+
+
+
+ PURGE ALL SOLUTION AND POST DATA
+ SAVE ALL MODEL DATA
+
+ ALL CURRENT ANSYS DATA WRITTEN TO FILE NAME= top2d.db
+  FOR POSSIBLE RESUME FROM THIS POINT
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          4
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          0
+
++--------------------- A N S Y S   S T A T I S T I C S ------------------------+
+
+Release: 2020 R2            Build: 20.2       Update: UP20200601   Platform: WINDOWS x64 
+Date Run: 10/31/2023   Time: 20:47     Process ID: 9136
+Operating System: Windows 10  (Build: 22621)
+
+Processor Model: AMD Ryzen 7 7735H with Radeon Graphics
+
+Compiler: Intel(R) FORTRAN Compiler Version 19.0.0  (Build: 20190206)
+          Intel(R) C/C++ Compiler Version 19.0.0  (Build: 20190206)
+          Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191125
+
+Number of machines requested            :    1
+Total number of cores available         :   16
+Number of physical cores available      :    8
+Number of processes requested           :    1
+Number of threads per process requested :    2
+Total number of cores requested         :    2 (Shared Memory Parallel)                    
+
+GPU Acceleration: Not Requested
+
+Job Name: top2d
+Input File: D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\Python\top2d_rinf.txt
+Working Directory: D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results
+
+Total CPU time for main thread                    :        0.6 seconds
+Total CPU time summed for all threads             :        0.8 seconds
+
+Elapsed time spent obtaining a license            :        0.7 seconds
+Elapsed time spent pre-processing model (/PREP7)  :        0.1 seconds
+Elapsed time spent solution - preprocessing       :        0.0 seconds
+Elapsed time spent computing solution             :        0.2 seconds
+Elapsed time spent solution - postprocessing      :        0.0 seconds
+Elapsed time spent post-processing model (/POST1) :        0.1 seconds
+ 
+Equation solver used                              :            Sparse (symmetric)
+
+Maximum total memory used                         :      155.0 MB
+Maximum total memory allocated                    :     2112.0 MB
+Total physical memory available                   :         15 GB
+
+Total amount of I/O written to disk               :        0.0 GB
+Total amount of I/O read from disk                :        0.0 GB
+
++------------------ E N D   A N S Y S   S T A T I S T I C S -------------------+
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                            ANSYS RUN COMPLETED                            |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Ansys 2020 R2               Build 20.2         UP20200601     WINDOWS x64 |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)  1024 MB    Scratch Memory Requested      1024 MB |
+ | Maximum Database Used      13 MB    Maximum Scratch Memory Used    142 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          0.766       Time  =  20:47:17        |
+ |        Elapsed Time (sec) =          5.000       Date  =  10/31/2023      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*

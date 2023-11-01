@@ -1,0 +1,53 @@
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       16:11:18
+
+ *** WARNING ***                         CP =       2.094   TIME= 16:13:21
+ Specified range of 5 to 6 exceeds the allowed maximum of 2.  The ESEL   
+ command is ignored.                                                     
+
+ *** WARNING ***                         CP =       2.172   TIME= 16:14:15
+ In the graphical user interface, the *VWRITE command can only be        
+ executed from an external file such as /INPUT or *USE.  The command is  
+ ignored.                                                                
+
+ *** WARNING ***                         CP =       2.172   TIME= 16:14:15
+ Error in format, not enough data format specifiers                      
+  .                                                                      
+
+ *** ERROR ***                           CP =       2.172   TIME= 16:14:15
+ Missing separator between two fields.                                   
+
+ *** ERROR ***                           CP =       2.219   TIME= 16:14:19
+ The above error occurred processing field= 10I                          
+  Line= *VWRITE,ELEMSUM,NODESUM.                                         
+
+ *** ERROR ***                           CP =       2.266   TIME= 16:14:22
+ Missing separator between two fields.                                   
+
+ *** ERROR ***                           CP =       2.281   TIME= 16:14:23
+ The above error occurred processing field= 10I                          
+  Line= *VWRITE,ELEMSUM,NODESUM.                                         
+
+ *** ERROR ***                           CP =       2.281   TIME= 16:14:25
+ Missing separator between two fields.                                   
+
+ *** ERROR ***                           CP =       2.312   TIME= 16:14:26
+ The above error occurred processing field= 10I                          
+  Line= %10I %10I.                                                       
+
+ *** ERROR ***                           CP =       2.312   TIME= 16:14:27
+ Missing separator between two fields.                                   
+
+ *** ERROR ***                           CP =       2.312   TIME= 16:14:27
+ The above error occurred processing field= 10I                          
+  Line= %10I %10I.                                                       
+
+ *** ERROR ***                           CP =       2.312   TIME= 16:14:28
+ Missing separator between two fields.                                   
+
+ *** ERROR ***                           CP =       2.312   TIME= 16:14:28
+ The above error occurred processing field= 10I                          
+  Line= %10I %10I.                                                       
+
+ *** WARNING ***                         CP =       2.328   TIME= 16:14:28
+ %10I%10I is not a recognized BEGIN command, abbreviation, or macro.     
+ This command will be ignored.                                           

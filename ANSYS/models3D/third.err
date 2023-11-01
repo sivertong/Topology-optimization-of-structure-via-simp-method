@@ -1,0 +1,62 @@
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       16:58:51
+
+ *** ERROR ***                           CP =       0.141   TIME= 16:58:52
+ Data file D:\CodeSave\GitCode\Topology-optimization-of-structure-via-sim
+ p-methodNEW\ANSYS\models3D\third.db has incorrect format, is missing    
+ READ/WRITE permission, or is empty for RESUME.                          
+
+ *** WARNING ***                         CP =       0.141   TIME= 16:58:52
+ WHILE PROCESSING FILE BASED INPUT (/INPUT OR MACRO) AN ERROR HAS        
+ OCCURRED.  SHOULD INPUT PROCESSING BE SUSPENDED?                        
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       16:59:56
+
+ *** ERROR ***                           CP =       0.172   TIME= 16:59:57
+ Data file D:\CodeSave\GitCode\Topology-optimization-of-structure-via-sim
+ p-methodNEW\ANSYS\models3D\third.db has incorrect format, is missing    
+ READ/WRITE permission, or is empty for RESUME.                          
+
+ *** WARNING ***                         CP =       0.172   TIME= 16:59:57
+ WHILE PROCESSING FILE BASED INPUT (/INPUT OR MACRO) AN ERROR HAS        
+ OCCURRED.  SHOULD INPUT PROCESSING BE SUSPENDED?                        
+
+ *** ERROR ***                           CP =       0.719   TIME= 17:00:33
+ The program is unable to open file D:\CodeSave\GitCode\Topology-optimiza
+ tion-of-structure-via-simp-methodNEW\ANSYS\models3D\third.db.  If the   
+ suggestions in the associated error messages immediately preceding      
+ and/or following this error message do not help resolve the file        
+ issue, please send the data leading to this operation to your           
+ technical support provider, along with the I/O error code of 999 and    
+ the system error code of 0, for help in determining the possible        
+ reasons as to why this file could not be opened.                        
+
+ *** ERROR ***                           CP =       0.734   TIME= 17:00:51
+ The program is unable to open file .  Unit 16 is already in use.        
+ Please send the data leading to this operation to your technical        
+ support provider, as this will allow ANSYS, Inc to improve the          
+ program.                                                                
+
+ *** ERROR ***                           CP =       0.828   TIME= 17:00:59
+ Data file D:\CodeSave\GitCode\Topology-optimization-of-structure-via-sim
+ p-methodNEW\ANSYS\models3D\third.db has incorrect format, is missing    
+ READ/WRITE permission, or is empty for RESUME.                          
+
+ *** WARNING ***                         CP =       1.359   TIME= 17:01:10
+ The Comp label on the /PSF command for SURF156 when KEYOPT(2) = 1 is    
+ not correct.  The program proceeds with old label.  Checking for this   
+ discontinued.                                                           
+
+ *** ERROR ***                           CP =       4.812   TIME= 17:02:03
+ The program is unable to open file D:\CodeSave\GitCode\Topology-optimiza
+ tion-of-structure-via-simp-methodNEW\ANSYS\models3D\Xuanbi.db.  If the  
+ suggestions in the associated error messages immediately preceding      
+ and/or following this error message do not help resolve the file        
+ issue, please send the data leading to this operation to your           
+ technical support provider, along with the I/O error code of 999 and    
+ the system error code of 0, for help in determining the possible        
+ reasons as to why this file could not be opened.                        
+
+ *** ERROR ***                           CP =       4.938   TIME= 17:02:19
+ The program is unable to open file .  Unit 16 is already in use.        
+ Please send the data leading to this operation to your technical        
+ support provider, as this will allow ANSYS, Inc to improve the          
+ program.                                                                

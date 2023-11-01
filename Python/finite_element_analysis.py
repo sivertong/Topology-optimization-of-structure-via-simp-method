@@ -31,25 +31,29 @@ class FiniteElementAnalysis(object):
         # 输入文件(APDL)和输出文件都将在cwd目录中，而ANSYS需要的其他输入数据或输出数据的路径，将由ANSYS的APDL指定
 
 
-        self.ANSYS_path = "E:\Program Files\ANSYS Inc\\v170\ANSYS\\bin\winx64\MAPDL.exe"
+        self.ANSYS_path = 'D:\Ansys\ANSYS Inc\\v202\\ansys\\bin\winx64\MAPDL.exe'
         # self.ANSYS_path = "D:\Program Files\ANSYS2017\ANSYS17.0\ANSYS Inc\\v170\ANSYS\\bin\winx64\MAPDL.exe"
         # self.ANSYS_path = "F:\ANSYS 17.0\ANSYS Inc\\v170\ANSYS\\bin\winx64\MAPDL.exe"
 
-        self.awd = 'H:/GitHub/Topology-optimization-of-structure-via-simp-method/ANSYS/results/'
+        self.awd = 'D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results3D\\'
         if global_variable.TYPE == 'top2d':
         #---------------实验室台式机路径--------------------
             self.meshdata_cmd = [self.ANSYS_path, '-b', '-i',
                    'top2d_minf.txt', '-o', 'top2d_minf.out']
-            self.result_cmd = [self.ANSYS_path, '-b', '-i',
-                   'top2d_rinf.txt', '-o', 'top2d_rinf.out']
+            self.result_cmd = ["D:\Ansys\ANSYS Inc\\v202\\ansys\\bin\winx64\MAPDL.exe", '-p ansys', '-smp', '-np 2', '-lch', '-dir', "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results", '-j', "file", '-s read', '-l', 'en-us', '-b', '-i', "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\Python\\top2d_rinf.txt", '-o', "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results\\file.out"]
             self.dim = global_variable.DIM
 
         if global_variable.TYPE == 'top3d':
             # ---------------实验室台式机路径--------------------
             self.meshdata_cmd = [self.ANSYS_path, '-b', '-i',
                                  'top3d_minf.txt', '-o', 'top3d_minf.out']
-            self.result_cmd = [self.ANSYS_path, '-b', '-i',
-                               'top3d_rinf.txt', '-o', 'top3d_rinf.out']
+            self.result_cmd = ["D:\Ansys\ANSYS Inc\\v202\\ansys\\bin\winx64\MAPDL.exe", '-p ansys', '-smp', '-np 2',
+                               '-lch', '-dir',
+                               "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results3D",
+                               '-j', "file", '-s read', '-l', 'en-us', '-b', '-i',
+                               "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results3D\\top3d_rinf.txt",
+                               '-o',
+                               "D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\\results3D\\top3d_rinf.out"]
             self.dim = global_variable.DIM
 
 
@@ -89,8 +93,76 @@ class FiniteElementAnalysis(object):
         nu = global_variable.NU * np.ones((global_variable.ELEMENT_COUNTS))
         ex = (x**global_variable.PENAL)*(global_variable.E)
         material = np.array([nu, ex]).T
-        np.savetxt(self.awd+"material.txt", material, fmt=' %-.7E', newline='\n')
+        np.savetxt(self.awd+"material.txt", material, fmt=('%-.7e','%-.7e'), newline='\n')
+        # np.savetxt(self.awd + "material.txt", material, fmt=('%10.5f', '%10.5f'), newline='\n')
 
+    def extract_element_stiffness(self,text):
+        """
+        提取单元刚度矩阵,提取混合网格单元刚度矩阵，将由子类去解决
+
+        Parameters
+        ----------
+        text:由ANSYSdebug命令生成的包含单元刚度矩阵的文本
+        dim:单元刚度矩阵的维度
+
+        Returns
+        ----------
+        返回单元刚度矩阵，每一页对应一个单元的刚度矩阵
+        """
+        #------------version1----------------------
+        k = zeros([global_variable.ELEMENT_COUNTS, self.dim, self.dim])  # numpy 中shape的顺序为页、行、列，轴的顺序与shape的顺序对于，0轴对应页，1轴对于行、2轴对应列
+        # 去除Ke中的文字
+        ke = re.sub(r' THE BELOW ELEMENT MATRICES AND LOAD VECTORS ARE IN THE NODAL COORDINATE SYSTEMS.\n','',text)
+        ke = re.sub(r' GRAVITY AND TRANSIENT EFFECTS ARE INCLUDED.\n\n','',ke)
+        ke = re.split(r'STIFFNESS MATRIX FOR ELEMENT[ ]+\d{1,3}[ ]+PLANE182', ke)
+        ke = ke[1:]
+        ke[-1] = re.split(r'Range', ke[-1])[0]
+        # 获取text文本中单元的顺序号
+        element_number = self.extract_element_number(text)
+        # 生成可以使用的单元刚度矩阵
+        i = 0
+        for element_stiffness in ke:
+            string_type_number = re.split(r'[ ]+', re.sub(r'[ ]\d[ ]', '', element_stiffness))  # 去除Ke中的行号
+            for index, item in enumerate(string_type_number[1:-1]):  # 将字符串类型转化成数值型
+                string_type_number[index] = float(item)
+            fixed_ke = np.array(string_type_number[:-2]).reshape(self.dim, self.dim)  # 将1x64的列向量变成8x8的数组
+            k[element_number[i] - 1] = fixed_ke
+            i = i + 1
+        # 返回全部单元的单元刚度矩阵
+        return k
+
+        #---------------version2---------------------
+        # k = zeros([global_variable.ELEMENT_COUNTS, self.dim, self.dim])  # numpy 中shape的顺序为页、行、列，轴的顺序与shape的顺序对于，0轴对应页，1轴对于行、2轴对应列
+        # element_order = []
+        # # 抽取单元刚度矩阵的所有数值
+        # element_value = re.findall(r'.0[.]\d{7}E.\d{2}', text)
+        # K_disorder = np.array(element_value, dtype=float).reshape(global_variable.ELEMENT_COUNTS, self.dim, self.dim)
+        # # 抽取单元刚度矩阵的序号
+        # element_numbers = re.findall(r'STIFFNESS MATRIX FOR ELEMENT[ ]+\d+', text)
+        # for element_number in element_numbers:
+        #     element_order.append(int(re.split(r'[ ]', element_number)[-1]))
+        # # 组装
+        # # sorted_element_order = array(element_order.sort())
+        # for i in range(global_variable.ELEMENT_COUNTS):
+        #     k[element_order[i] - 1, :, :] = K_disorder[i, :, :]
+        # return k
+
+    def extract_element_number(self,text):
+        """
+        获取text文本中单元的顺序号,因为单元刚度矩阵在text中的顺序不是按照单元序号排列的
+        在version1版本的extract_element_stiffness中需要用到，在version2版本中已经废弃了
+
+        Returns
+        ----------
+        返回text文本中单元顺序
+
+        """
+        element = re.findall(r'ELEMENT[ ]+\d{1,3}', text)
+        element_numbers = []
+        for string in element:
+            number = int(re.sub(r'ELEMENT', '', string))
+            element_numbers.append(number)
+        return element_numbers
 
     def get_meshmodel_data(self):
         """
@@ -107,6 +179,9 @@ class FiniteElementAnalysis(object):
         centers:单元的中心坐标
         v:单元体积
         """
+        # with open(self.awd+'elements_stiffness.out','r') as f:
+        #     text = f.read()
+        # k = self.extract_element_stiffness(text)
 
         element_attributes = loadtxt(self.awd+'elements_nodes.txt', dtype=int)
         centers = loadtxt(self.awd+'elements_centers.txt')
@@ -120,6 +195,12 @@ class FiniteElementAnalysis(object):
         更新材料密度，进行有限元分析并获取结果数据文件
         """
         self.generate_material_properties(x)
+
+        # try:
+        #     subprocess.check_call(self.result_cmd)
+        # except subprocess.CalledProcessError as e:
+        #     print(f"Error: {e}")
+
         subprocess.call(self.result_cmd)
         u = loadtxt(self.awd+'nodal_solution_u.txt',dtype=float)
         stress = loadtxt(self.awd+'nodal_solution_stress.txt',dtype = float)

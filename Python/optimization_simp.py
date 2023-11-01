@@ -48,6 +48,11 @@ class Simp(HasTraits):
     # A new algorithm
     def get_distance_table(self):
         neibors = np.loadtxt(self.ansys_solver.awd+'neibors.txt', dtype=int)
+
+        # 删除掉越界的幽灵单元，幽灵单元的值是通过workbench初步制作模型时获知的
+        neibors[neibors > global_variable.RealElem] = 0
+        neibors = neibors[:global_variable.RealElem]
+
         neiborslist = []
         for i in range(neibors.shape[0]):
             index = neibors[i, np.where(neibors[i, :] > 0)]
@@ -88,7 +93,10 @@ class Simp(HasTraits):
         """
         优化准则法
         """
-        lambda1 = 0; lambda2 = 100000; move = global_variable.MOVE
+        # 悬臂梁使用此参数，Complex2D使用此参数无效
+        # lambda1 = 0; lambda2 = 100000; move = global_variable.MOVE
+        # Complex2D使用此参数
+        lambda1 = 0; lambda2 = 10000000; move = global_variable.MOVE
         while(lambda2-lambda1>1e-4):
             lambda_mid = 0.5*(lambda2+lambda1)
             #index = np.where(array(corrected_dc)<0)
@@ -111,6 +119,7 @@ class Simp(HasTraits):
         SIMP优化算法
         """
         #初始化数据
+
         penal = global_variable.PENAL
         volfrac = global_variable.VOLFAC
         rmin = global_variable.R
@@ -120,10 +129,22 @@ class Simp(HasTraits):
         c_total= 0
         Emin = 1e-9
         #开始迭代
-        while self.loop<26:
+        while self.loop<200:
             c_old =c_total
             xold = x;
+            xold = xold[:global_variable.RealElem]
             U, stress, strain = self.ansys_solver.get_result_data(x)
+
+            # Ue = np.zeros((global_variable.ELEMENT_COUNTS, global_variable.DIM, 1))
+            # for i in range(global_variable.ELEMENT_COUNTS):
+            #     nodes_number = global_variable.ELEMENT_ATTRIBUTES[i]
+            #     Ue[i,:,:] =U[[nodes_number - 1],:].reshape(-1,global_variable.DIM,1)
+            # c = matmul((x ** penal).reshape(global_variable.ELEMENT_COUNTS,1,1) , matmul(matmul(Ue.transpose((0,2,1)),global_variable.K),Ue))
+            # c_total = sum(c,axis = 0)[0][0]
+            # dc = matmul((penal*(x ** (penal-1))).reshape(global_variable.ELEMENT_COUNTS, 1, 1), matmul(matmul(Ue.transpose((0, 2, 1)), global_variable.K), Ue))
+            # dc = dc[:,0,0].tolist()
+
+            # 使用Ansys计算c
             c = np.loadtxt(self.ansys_solver.awd+'strain_energy.txt',dtype = float)[0:global_variable.ELEMENT_COUNTS].reshape(global_variable.ELEMENT_COUNTS,1)*2
             uku = c/(x.reshape((global_variable.ELEMENT_COUNTS,1))**penal)
             dc = (penal*(x.reshape((global_variable.ELEMENT_COUNTS,1))** (penal-1)))*uku
@@ -150,8 +171,13 @@ class Simp(HasTraits):
 
 #单元测试
 if __name__=='__main__':
-    global_variable.initialize_global_variable(DIM = 8)
-    simp_solver = Simp(dim = 8)
+    # 启动前首先需要设置Python的工作路径
+    # 检查ANSYS的工作路径
+    # 检查ANSYS运行命令中的路径
+    # 检查ANSYS启动项命令
+    global_variable.hyperparameter(1.2, 3, 0.4, 0.2, 1, 0.3)
+    global_variable.initialize_global_variable('top3d')
+    simp_solver = Simp()
     density = simp_solver.simp()
 
     # x = simp_solver.x_axis

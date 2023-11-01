@@ -1,0 +1,284 @@
+
+ ANSYS Mechanical Enterprise                       
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *            ANSYS 2020 R2          LEGAL NOTICES             *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2020 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ 2020 R2 
+     
+ Point Releases and Patches installed:   
+     
+ ANSYS, Inc. Products 2020 R2
+ SpaceClaim 2020 R2  
+ Discovery 2020 R2   
+ AIM 2020 R2 
+ Live (includes SpaceClaim) 2020 R2  
+ ANSYS Sherlock 2020 R2  
+ Autodyn 2020 R2 
+ LS-DYNA 2020 R2 
+ ICEM CFD 2020 R2
+ Aqwa 2020 R2
+ SPEOS 2020 R2   
+ Mechanical Products 2020 R2 
+ Additive 2020 R2
+ Icepak (includes CFD-Post) 2020 R2  
+ ACIS Geometry Interface 2020 R2 
+ AutoCAD Geometry Interface 2020 R2  
+ Catia, Version 4 Geometry Interface 2020 R2 
+ Catia, Version 5 Geometry Interface 2020 R2 
+ Catia, Version 6 Geometry Interface 2020 R2 
+ Creo Elements/Direct Modeling Geometry Interface 2020 R2
+ Creo Parametric Geometry Interface 2020 R2  
+ Inventor Geometry Interface 2020 R2 
+ JTOpen Geometry Interface 2020 R2   
+ NX Geometry Interface 2020 R2   
+ Parasolid Geometry Interface  2020 R2   
+ Solid Edge Geometry Interface 2020 R2   
+ SOLIDWORKS Geometry Interface 2020 R2   
+ ANSYS, Inc. License Manager 2020 R2 
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  BATCH MODE REQUESTED (-b)    = LIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  INPUT FILE NAME              = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-method#version-100\Python\top3d_minf.txt
+  OUTPUT FILE NAME             = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-method#version-100\Python\top3d_minf.out
+
+ RELEASE= 2020 R2              BUILD= 20.2      UP20200601   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file0  21:57:23  OCT 29, 2023 CP=      0.219
+
+     1  /CWD,'H:\GitHub\Topology-optimization-of-structure-via-simp-method\\ANSYS\results'  
+     2  RESUME,'cheshen','db','H:\GitHub\Topology-optimization-of-structure-via-simp-method\ANSYS\models',0,0   
+     3  /FILENAME,top3d,1   
+     4  /TITLE,top3d
+     5      
+     6  !optional for user defined command  
+     7  ESEL,U,TYPE,,5,6
+     8      
+     9  *GET,ELEMSUM,ELEMENT,0,COUNT
+    10  *GET,NODESUM,NODE,0,COUNT   
+    11  *CFOPEN,elements_nodes_counts,txt   
+    12  *VWRITE,ELEMSUM,NODESUM 
+    13  %10I    %10I
+    14  *CFCLOS 
+    15      
+    16  /SOL
+    17  ANTYPE,0
+    18      
+    19  !/OUTPUT,elements_stiffness,out,,   
+    20  !/DEBUG,-1,,,1  
+    21      
+    22  !/STATUS,SOLU   
+    23  !SOLVE  
+    24      
+    25  *DIM,ELEMENTS_NODES,ARRAY,ELEMSUM,8 
+    26  *VGET,ELEMENTS_NODES(1,1),ELEM,1,NODE,1 
+    27  *VGET,ELEMENTS_NODES(1,2),ELEM,1,NODE,2 
+    28  *VGET,ELEMENTS_NODES(1,3),ELEM,1,NODE,3 
+    29  *VGET,ELEMENTS_NODES(1,4),ELEM,1,NODE,4 
+    30  *VGET,ELEMENTS_NODES(1,5),ELEM,1,NODE,5 
+    31  *VGET,ELEMENTS_NODES(1,6),ELEM,1,NODE,6 
+    32  *VGET,ELEMENTS_NODES(1,7),ELEM,1,NODE,7 
+    33  *VGET,ELEMENTS_NODES(1,8),ELEM,1,NODE,8 
+    34  *CFOPEN,elements_nodes,txt  
+    35  *VWRITE,ELEMENTS_NODES(1,1), ELEMENTS_NODES(1,2),ELEMENTS_NODES(1,3),ELEMENTS_NODES(1,4),ELEMENTS_NODES(1,5),ELEMENTS_NODES(1,6),ELEMENTS_NODES(1,7),ELEMENTS_NODES(1,8)
+    36  %10I    %10I    %10I    %10I    %10I    %10I    %10I    %10I
+    37  *CFCLOS 
+    38      
+    39  *DIM,ELEMENTS_CENTERS,ARRAY,ELEMSUM,3   
+    40  *VGET,ELEMENTS_CENTERS(1,1),ELEM,1,CENT,X   
+    41  *VGET,ELEMENTS_CENTERS(1,2),ELEM,1,CENT,Y   
+    42  *VGET,ELEMENTS_CENTERS(1,3),ELEM,1,CENT,Z   
+    43  *CFOPEN,elements_centers,txt
+    44  *VWRITE,SEQU,ELEMENTS_CENTERS(1,1), ELEMENTS_CENTERS(1,2),ELEMENTS_CENTERS(1,3) 
+    45  %10I  %15.7E  %15.7E  %15.7E
+    46  *CFCLOS 
+    47      
+    48  *DIM,NODES_COORDINATE,ARRAY,NODESUM,3   
+    49  *VGET,NODES_COORDINATE(1,1),NODE,1,LOC,X
+    50  *VGET,NODES_COORDINATE(1,2),NODE,1,LOC,Y
+    51  *VGET,NODES_COORDINATE(1,3),NODE,1,LOC,Z
+    52  *CFOPEN,node_coordinates,txt
+    53  *VWRITE,NODES_COORDINATE(1,1),NODES_COORDINATE(1,2),NODES_COORDINATE(1,3)   
+    54  %15.7E  %15.7E  %15.7E  
+    55  *CFCLOS 
+    56      
+    57  *DIM,ELEMENTS_VOLUMN,ARRAY,ELEMSUM,1
+    58  *VGET,ELEMENTS_VOLUMN(1,1),ELEM,1,GEOM  
+    59  *CFOPEN,elements_volumn,txt 
+    60  *VWRITE,SEQU,ELEMENTS_VOLUMN(1,1)   
+    61  %10I    %15.7E  
+    62  *CFCLOS 
+    63      
+    64      
+    65  !for 3D project 
+    66  *DIM,connectedelem,ARRAY,100,ELEMSUM
+    67  *DIM,neibors,ARRAY,ELEMSUM,100  
+    68  *DO,i,1,ELEMSUM 
+    69  ESEL,S, , ,i
+    70  NSLE,S  
+    71  ESLN,S  
+    72  ESEL,U,TYPE,,5,6
+    73  *VGET,connectedelem(1,i),ELEM,,ELIST
+    74  *ENDDO  
+    75      
+    76  ALLSEL,ALL  
+    77  *MFUN,neibors(1,1),TRAN,connectedelem(1,1)  
+    78  *MWRITE,neibors(1,1),neibors,txt,,JIK,100,ELEMSUM,1 
+    79  (100F10.0)  
+    80  *CFCLOS 
+    81      
+    82  ALLSEL,ALL  
+    83  SAVE
+    84  FINISH  
+    85  exit
+
+ RUN SETUP PROCEDURE FROM FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans
+
+ /INPUT FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans  LINE=       0
+
+ *** WARNING ***                         CP =       0.266   TIME= 21:57:23
+ The working directory specified (H:\GitHub\Topology-optimization-of-stru
+ cture-via-simp-method\\ANSYS\results) is not a directory on machine     
+ sivertong.  The /CWD command is ignored on MPI process with rank 0.     
+
+ RESUME ANSYS DATA FROM FILE NAME=H:\GitHub\Topology-optimization-of-structure-via-simp-method\ANSYS\models\cheshen.db                                                                                                                                                                                
+
+ *** ERROR ***                           CP =       0.266   TIME= 21:57:23
+ Data file H:\GitHub\Topology-optimization-of-structure-via-simp-method\A
+ NSYS\models\cheshen.db does not exist for RESUME.                       
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          1
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          1
+
++--------- D I S T R I B U T E D   A N S Y S   S T A T I S T I C S ------------+
+
+Release: 2020 R2            Build: 20.2       Update: UP20200601   Platform: WINDOWS x64 
+Date Run: 10/29/2023   Time: 21:57     Process ID: 28956
+Operating System: Windows 10  (Build: 22621)
+
+Processor Model: AMD Ryzen 7 7735H with Radeon Graphics
+
+Compiler: Intel(R) FORTRAN Compiler Version 19.0.0  (Build: 20190206)
+          Intel(R) C/C++ Compiler Version 19.0.0  (Build: 20190206)
+          Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191125
+
+Number of machines requested            :    1
+Total number of cores available         :   16
+Number of physical cores available      :    8
+Number of processes requested           :    2
+Number of threads per process requested :    1
+Total number of cores requested         :    2 (Distributed Memory Parallel)               
+MPI Type: INTELMPI
+MPI Version: Intel(R) MPI Library 2018 Update 3 for Windows* OS
+
+
+GPU Acceleration: Not Requested
+
+Job Name: file0
+Input File: top3d_minf.txt
+
+  Core                Machine Name   Working Directory
+ -----------------------------------------------------
+     0                   sivertong   D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-method#version-100\Python
+     1                   sivertong   D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-method#version-100\Python
+ 
+Latency time from master to core     1 =    1.928 microseconds
+ 
+Communication speed from master to core     1 =  7565.51 MB/sec
+
+Total CPU time for main thread                    :        0.3 seconds
+Total CPU time summed for all threads             :        0.3 seconds
+
+Elapsed time spent obtaining a license            :       10.4 seconds
+Elapsed time spent pre-processing model (/PREP7)  :        0.0 seconds
+Elapsed time spent solution - preprocessing       :        0.0 seconds
+Elapsed time spent computing solution             :        0.0 seconds
+Elapsed time spent solution - postprocessing      :        0.0 seconds
+Elapsed time spent post-processing model (/POST1) :        0.0 seconds
+ 
+
+Maximum total memory used                         :        7.0 MB
+Maximum total memory allocated                    :     3136.0 MB
+Total physical memory available                   :         15 GB
+
+Total amount of I/O written to disk               :        0.0 GB
+Total amount of I/O read from disk                :        0.0 GB
+
++------ E N D   D I S T R I B U T E D   A N S Y S   S T A T I S T I C S -------+
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                       DISTRIBUTED ANSYS RUN COMPLETED                     |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Ansys 2020 R2               Build 20.2         UP20200601     WINDOWS x64 |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)  1024 MB    Scratch Memory Requested      1024 MB |
+ | Maximum Database Used       1 MB    Maximum Scratch Memory Used      1 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          0.266       Time  =  21:57:23        |
+ |        Elapsed Time (sec) =         12.000       Date  =  10/29/2023      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*

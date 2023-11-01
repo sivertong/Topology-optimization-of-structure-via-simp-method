@@ -1,0 +1,180 @@
+
+ ANSYS Mechanical Enterprise                       
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *            ANSYS 2020 R2          LEGAL NOTICES             *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2020 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ 2020 R2 
+     
+ Point Releases and Patches installed:   
+     
+ ANSYS, Inc. Products 2020 R2
+ SpaceClaim 2020 R2  
+ Discovery 2020 R2   
+ AIM 2020 R2 
+ Live (includes SpaceClaim) 2020 R2  
+ ANSYS Sherlock 2020 R2  
+ Autodyn 2020 R2 
+ LS-DYNA 2020 R2 
+ ICEM CFD 2020 R2
+ Aqwa 2020 R2
+ SPEOS 2020 R2   
+ Mechanical Products 2020 R2 
+ Additive 2020 R2
+ Icepak (includes CFD-Post) 2020 R2  
+ ACIS Geometry Interface 2020 R2 
+ AutoCAD Geometry Interface 2020 R2  
+ Catia, Version 4 Geometry Interface 2020 R2 
+ Catia, Version 5 Geometry Interface 2020 R2 
+ Catia, Version 6 Geometry Interface 2020 R2 
+ Creo Elements/Direct Modeling Geometry Interface 2020 R2
+ Creo Parametric Geometry Interface 2020 R2  
+ Inventor Geometry Interface 2020 R2 
+ JTOpen Geometry Interface 2020 R2   
+ NX Geometry Interface 2020 R2   
+ Parasolid Geometry Interface  2020 R2   
+ Solid Edge Geometry Interface 2020 R2   
+ SOLIDWORKS Geometry Interface 2020 R2   
+ ANSYS, Inc. License Manager 2020 R2 
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  BATCH MODE REQUESTED (-b)    = LIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  INPUT FILE NAME              = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results\top3d_minf.txt
+  OUTPUT FILE NAME             = D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results\top3d_minf.out
+
+ RELEASE= 2020 R2              BUILD= 20.2      UP20200601   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file0  16:40:15  NOV 01, 2023 CP=      0.172
+
+
+ RUN SETUP PROCEDURE FROM FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans
+
+ /INPUT FILE= D:\Ansys\ANSYS Inc\v202\ANSYS\apdl\start.ans  LINE=       0
+
+ Current working directory switched to D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\results                                                                                                                                                                 
+
+ RESUME ANSYS DATA FROM FILE NAME=D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\ANSYS\models\complex2D_grid.db                                                                                                                                                            
+
+ *** ANSYS GLOBAL STATUS *** 
+
+ TITLE =  File: H:\MATERTHESIS\ANSYS_SD\APDL_SCRIPT\ANSYS_GUI\VERSATILE_SIMP\2D
+ ANALYSIS TYPE =  STATIC (STEADY-STATE)
+ NUMBER OF ELEMENT TYPES =      1
+      3005 ELEMENTS CURRENTLY SELECTED.  MAX ELEMENT NUMBER =        3005
+      3198 NODES CURRENTLY SELECTED.     MAX NODE NUMBER =           3198
+        15 KEYPOINTS CURRENTLY SELECTED. MAX KEYPOINT NUMBER =         15
+        15 LINES CURRENTLY SELECTED.     MAX LINE NUMBER =             15
+         1 AREAS CURRENTLY SELECTED.     MAX AREA NUMBER =              1
+ MAXIMUM LINEAR PROPERTY NUMBER        =       1
+ ACTIVE COORDINATE SYSTEM              =       0  (CARTESIAN)  
+ MAXIMUM COUPLED D.O.F. SET NUMBER     =       2
+ NUMBER OF SPECIFIED CONSTRAINTS       =     180
+ NUMBER OF NODAL LOADS                 =      25
+ CURRENT LOAD CASE =      0 OF      0
+ LOAD SET   =       1
+ SUBSTEP    =       1
+ TIME/FREQ  =    1.0000    
+
+ INITIAL JOBNAME = file
+ CURRENT JOBNAME = file
+
+ CURRENT JOBNAME REDEFINED AS top2d
+     Opening new LOG, ERROR, LOCK and PAGE FILES
+
+ TITLE= 
+ top2d                                                                         
+
+
+ *GET  ELEMSUM   FROM  ELEM  ITEM=COUN           VALUE=  3005.00000    
+
+ *GET  NODESUM   FROM  NODE  ITEM=COUN       VALUE=  3198.00000     
+
+ OPENED FILE= elements_nodes_counts.txt FOR COMMAND FILE DATA 
+
+
+  COMMAND FILE CLOSED 
+
+
+ *****  ANSYS SOLUTION ROUTINE  *****
+
+
+ PERFORM A STATIC ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+
+ /OUTPUT FILE= elements_stiffness.out
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                       DISTRIBUTED ANSYS RUN COMPLETED                     |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Ansys 2020 R2               Build 20.2         UP20200601     WINDOWS x64 |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)  1024 MB    Scratch Memory Requested      1024 MB |
+ | Maximum Database Used      14 MB    Maximum Scratch Memory Used    130 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          1.578       Time  =  16:40:18        |
+ |        Elapsed Time (sec) =          5.000       Date  =  11/01/2023      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*

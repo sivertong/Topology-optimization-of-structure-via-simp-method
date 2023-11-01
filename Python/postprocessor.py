@@ -22,7 +22,7 @@ class ResultData(object):
         需要通过VTKDataSource 作为接口，生成mayavi可以渲染的数据源
         以vtkdatasource开头的数据属于经过了VTKDataSource函数处理过的数据，可以被mayavi渲染
         '''
-        self.address = 'H:\GitHub\Topology-optimization-of-structure-via-simp-method'
+        self.address = 'D:\CodeSave\GitCode\Topology-optimization-of-structure-via-simp-methodNEW\\results3D_vtk'
         self.index = []
         self.U = np.zeros((global_variable.NODE_COUNTS,1))
         self.stress = np.zeros((global_variable.NODE_COUNTS,1))
@@ -114,7 +114,7 @@ class ResultData(object):
         self.vtkdatasource_density = VTKDataSource(data=self.unstrgrid_density, name='DensiytData')
 
     #生成网格数据，filter参数是为了过滤我们不想显示的密度单元，1表示全部显示，0表示全部不显示
-    def generate_unstrgrid_mesh(self, filter = 0):
+    def generate_unstrgrid_mesh(self, filter = 0.5):
         points = global_variable.NODE_COORDINATES
         self.index = where(self.density>=(1.0-filter))[0].tolist()
         cells = (global_variable.ELEMENT_ATTRIBUTES[self.index,:]-1)
@@ -130,6 +130,8 @@ class ResultData(object):
 
     #生成密度数据
     def update_unstrgrid_density(self, density):
+
+        self.index = self.index[:global_variable.RealElem]
 
         self.unstrgrid_density.cell_data.scalars = density[self.index]
         self.unstrgrid_density.cell_data.scalars.name = 'density'

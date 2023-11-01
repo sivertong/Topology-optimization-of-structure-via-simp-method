@@ -1,0 +1,7 @@
+/BATCH  
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       16:54:36
+RESUME,'Xuanbi3D_','db','../models3D'   
+/COM,ANSYS RELEASE 2020 R2           BUILD 20.2      UP20200601       16:54:36
+/INPUT,'third','inp','../models3D'  
+FINISH  
+! /EXIT,NOSAV   
